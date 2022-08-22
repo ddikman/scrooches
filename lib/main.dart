@@ -24,7 +24,7 @@ class ScroochesGame extends FlameGame with HasCollisionDetection, HasTappables {
   @override
   Future<void> onLoad() async {
     await FlameAudio.audioCache.load(popSound);
-    await FlameAudio.createPool(popSound, maxPlayers: 10, minPlayers: 0);
+    await FlameAudio.createPool(popSound, maxPlayers: 20, minPlayers: 0);
     final sprites = await Future.wait([
       'scrooch1.png',
       'scrooch2.png',
@@ -92,6 +92,7 @@ class Scrooch extends SpriteComponent
     print("tap down");
     gameRef.add(Scrooch(sprites: sprites, position: position));
     FlameAudio.play(popSound);
+    gameRef.remove(this);
     return true;
   }
 
